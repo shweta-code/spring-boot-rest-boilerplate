@@ -28,8 +28,10 @@ public class Category {
 }
 
 // TODO -
+// Remove TODOs
 // 1. Look at the int lengths of ids of all tables, if it is possible to enforce small int and all in category
 // 2. Correct lengths of varchar. - Enforce length of varchars
 // 3. Enum for category
 // Transaction Log Request
-// 3. Create a request interface - for Exchange Request, Borrow Request, BuyRequest
+// 4. Create a request interface - for Exchange Request, Borrow Request, BuyRequest
+// 5. Ask chatgpt for hibernate entities example
