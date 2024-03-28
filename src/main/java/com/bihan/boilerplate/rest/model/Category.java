@@ -33,5 +33,6 @@ public class Category {
 // 2. Correct lengths of varchar. - Enforce length of varchars
 // 3. Enum for category
 // Transaction Log Request
+// Image urls for item from s3
 // 4. Create a request interface - for Exchange Request, Borrow Request, BuyRequest
 // 5. Ask chatgpt for hibernate entities example
