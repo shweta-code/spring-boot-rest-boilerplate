@@ -29,5 +29,45 @@ public class Item {
     @Column(name = "is_listed")
     private boolean isListed;
 
-    // To add timestamp fields here
+    // To add timestamp fields here, created_at, modified_at, created_by, modified_by
+
+    public static class ItemBuilder {
+        private Long id;
+        private Category category;
+        private String description;
+        private boolean isListed;
+
+        public ItemBuilder() {
+        }
+
+        public ItemBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ItemBuilder category(Category category) {
+            this.category = category;
+            return this;
+        }
+
+        public ItemBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ItemBuilder isListed(boolean isListed) {
+            this.isListed = isListed;
+            return this;
+        }
+
+        public Item build() {
+            Item item = new Item();
+            item.setId(id);
+            item.setCategory(category);
+            item.setDescription(description);
+            item.setListed(isListed);
+            return item;
+        }
+    }
+
 }

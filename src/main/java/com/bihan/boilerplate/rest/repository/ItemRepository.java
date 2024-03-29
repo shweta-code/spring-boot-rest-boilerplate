@@ -9,5 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-
+    //TODO - Implement a method to get items by category id.
+    // For example - musical instruments if musical instrument is asked
 }

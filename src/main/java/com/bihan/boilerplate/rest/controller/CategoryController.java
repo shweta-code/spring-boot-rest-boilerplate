@@ -21,9 +21,9 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.getCategoryById(categoryId), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping
     public ResponseEntity<Category> createNewCategory(@RequestBody Category category) {
-        return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.CREATED);
     }
 }
 
@@ -31,3 +31,4 @@ public class CategoryController {
 // 1. What should happen if you fail to create a resource.
 // Possible Exceptions when inserting a new row in mysql.
 // 2. Best practices of a Spring project
+// 3. Check for validity of inputs and validity before inserting into database in one sample API

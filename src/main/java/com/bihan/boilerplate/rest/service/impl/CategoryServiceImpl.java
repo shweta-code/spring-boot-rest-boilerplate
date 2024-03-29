@@ -16,10 +16,10 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public Category getCategoryById(Long courseId) {
-        Optional<Category> category = categoryRepository.findById(courseId);
+    public Category getCategoryById(Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
         if (!category.isPresent()) {
-            throw new ResourceNotFoundException("Course", "id", courseId.toString());
+            throw new ResourceNotFoundException("Category", "id", categoryId.toString());
         }
         return category.get();
     }

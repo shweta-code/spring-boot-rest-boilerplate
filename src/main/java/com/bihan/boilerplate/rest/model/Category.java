@@ -24,7 +24,7 @@ public class Category {
     @NotNull(message = "description is required")
     private String description;
 
-    // Todo add timestamp fields here
+    // Todo add timestamp fields here - created_at, modified_at, created_by, modified_by
 }
 
 // TODO -
@@ -33,6 +33,6 @@ public class Category {
 // 2. Correct lengths of varchar. - Enforce length of varchars
 // 3. Enum for category
 // Transaction Log Request
-// Image urls for item from s3
-// 4. Create a request interface - for Exchange Request, Borrow Request, BuyRequest
+// Image urls for item from s3, created_at, modified_at, created_by, modified_by
+// Create aTO which will be , Entities are never rendered, DTO which will be modeled by service from entity
 // 5. Ask chatgpt for hibernate entities example
