@@ -34,6 +34,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    // TODO - Check if this is required
     @Transactional
     public NewItemDetails addItem(NewItemDetails newItemDetails) {
         try {

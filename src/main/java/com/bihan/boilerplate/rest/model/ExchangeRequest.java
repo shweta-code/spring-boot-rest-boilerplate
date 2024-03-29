@@ -33,8 +33,65 @@ public class ExchangeRequest {
     @JoinColumn(name = "offered_item_id", nullable = false)
     private Item offeredItem;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 
     // To add timestamp fields here
+
+    public enum ExchangeRequestStatus {
+        IN_PROGRESS("IN_PROGRESS"),
+        CREATED("CREATED"),
+        ACCEPTED("ACCEPTED"),
+        REJECTED("REJECTED"), // terminal state
+        CANCELLED("CANCELLED"), // terminal state
+        EXPIRED("EXPIRED"), // terminal state
+        PARTIALLY_COMPLETE("PARTIALLY_COMPLETE"),
+        COMPLETED("COMPLETED"); // terminal state
+
+        private String value;
+
+        ExchangeRequestStatus(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
+
+    public static class Builder {
+        private final ExchangeRequest exchangeRequest;
+
+        public Builder() {
+            this.exchangeRequest = new ExchangeRequest();
+        }
+
+        public Builder withRequesterUser(User requesterUser) {
+            this.exchangeRequest.requesterUser = requesterUser;
+            return this;
+        }
+
+        public Builder withReceiverUser(User receiverUser) {
+            this.exchangeRequest.receiverUser = receiverUser;
+            return this;
+        }
+
+        public Builder withRequestedItem(Item requestedItem) {
+            this.exchangeRequest.requestedItem = requestedItem;
+            return this;
+        }
+
+        public Builder withOfferedItem(Item offeredItem) {
+            this.exchangeRequest.offeredItem = offeredItem;
+            return this;
+        }
+
+        public Builder withStatus(String status) {
+            this.exchangeRequest.status = status;
+            return this;
+        }
+
+        public ExchangeRequest build() {
+            return this.exchangeRequest;
+        }
+    }
 }

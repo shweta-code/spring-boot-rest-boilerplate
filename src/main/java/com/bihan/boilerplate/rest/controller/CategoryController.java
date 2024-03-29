@@ -32,3 +32,4 @@ public class CategoryController {
 // Possible Exceptions when inserting a new row in mysql.
 // 2. Best practices of a Spring project
 // 3. Check for validity of inputs and validity before inserting into database in one sample API
+// TODO - Catch any exception and throw proper API Error response

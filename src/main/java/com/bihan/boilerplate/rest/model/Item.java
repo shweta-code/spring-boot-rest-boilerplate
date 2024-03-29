@@ -29,6 +29,9 @@ public class Item {
     @Column(name = "is_listed")
     private boolean isListed;
 
+    @Version
+    private int version; // Version field for optimistic locking
+
     // To add timestamp fields here, created_at, modified_at, created_by, modified_by
 
     public static class ItemBuilder {

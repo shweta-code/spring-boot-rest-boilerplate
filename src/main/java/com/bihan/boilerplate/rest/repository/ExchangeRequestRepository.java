@@ -10,14 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    //TODO - Implement a method to get items by category id.
-    // For example - musical instruments if musical instrument is asked
-
-    // TODO - Create a constant for query
+public interface ExchangeRequestRepository extends JpaRepository<Item, Long> {
     @Modifying
-    @Query(nativeQuery = true, value = "Update item set is_listed = 0 " +
-            "where id in (?1, ?2)")
-    void unListItems(Long requestedItemId, Long offeredItemId);
+    @Query(nativeQuery = true, value = "INSERT INTO exchange_request (requester_id, receiver_id, requested_item_id, offered_item_id, status) " +
+            "VALUES (?1, ?2, ?3, ?4, ?5)")
+    void createOrUpdateExchangeRequest(Long requesterUserId, Long receiverUserId, Long requestedItemId, Long offeredItemId, String status);
 }
