@@ -1,4 +1,4 @@
-package com.bihan.boilerplate.rest.model;
+package com.bihan.boilerplate.rest.entity;
 
 public enum  Status {
     ACTIVE,

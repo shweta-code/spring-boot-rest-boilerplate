@@ -1,6 +1,6 @@
 package com.bihan.boilerplate.rest.controller;
 
-import com.bihan.boilerplate.rest.model.Category;
+import com.bihan.boilerplate.rest.entity.Category;
 import com.bihan.boilerplate.rest.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+// TODO - Single Entity Succcess API
+// TODO - Exception Handlers
+// TODO - Create Table Borrow Request
+// TODO - BaseEntity
+// Read the problem again
+// spli tables - Exchange Request, Borrow
+// response
 @RestController
 @Validated
 @RequestMapping("/api/v1/category")
@@ -18,7 +25,8 @@ public class CategoryController {
 
     @GetMapping(value = "/{categoryId}")
     public ResponseEntity<Category> getCategoryById(@PathVariable("categoryId") Long categoryId) {
-        return new ResponseEntity<>(categoryService.getCategoryById(categoryId), HttpStatus.OK);
+        Category category = categoryService.getCategoryById(categoryId);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @PostMapping

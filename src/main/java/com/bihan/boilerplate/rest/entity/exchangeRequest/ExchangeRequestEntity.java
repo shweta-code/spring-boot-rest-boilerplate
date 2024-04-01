@@ -1,8 +1,11 @@
-package com.bihan.boilerplate.rest.model;
+package com.bihan.boilerplate.rest.entity.exchangeRequest;
 
+import com.bihan.boilerplate.rest.entity.Item;
+import com.bihan.boilerplate.rest.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -11,11 +14,13 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "exchange_request")
-public class ExchangeRequest {
+public class ExchangeRequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // To add create/modify here, created_at, modified_at, created_by, modified_by
 
     @ManyToOne
     @JoinColumn(name = "requester_id", nullable = false)
@@ -35,63 +40,59 @@ public class ExchangeRequest {
 
     private String status;
 
-    // To add timestamp fields here
+    @Version
+    private int version;
 
-    public enum ExchangeRequestStatus {
-        IN_PROGRESS("IN_PROGRESS"),
-        CREATED("CREATED"),
-        ACCEPTED("ACCEPTED"),
-        REJECTED("REJECTED"), // terminal state
-        CANCELLED("CANCELLED"), // terminal state
-        EXPIRED("EXPIRED"), // terminal state
-        PARTIALLY_COMPLETE("PARTIALLY_COMPLETE"),
-        COMPLETED("COMPLETED"); // terminal state
+    public enum ExchangeRequestUserActions {
+        ACCEPT("Accept"),
+        REJECT("Reject"),
+        CANCEL("Cancel"),
+        COMPLETE("Complete");
 
-        private String value;
-
-        ExchangeRequestStatus(String value) {
+        ExchangeRequestUserActions(String value) {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
+        private String value;
     }
 
     public static class Builder {
-        private final ExchangeRequest exchangeRequest;
+        private final ExchangeRequestEntity exchangeRequestEntity;
 
         public Builder() {
-            this.exchangeRequest = new ExchangeRequest();
+            this.exchangeRequestEntity = new ExchangeRequestEntity();
         }
 
         public Builder withRequesterUser(User requesterUser) {
-            this.exchangeRequest.requesterUser = requesterUser;
+            this.exchangeRequestEntity.requesterUser = requesterUser;
             return this;
         }
 
         public Builder withReceiverUser(User receiverUser) {
-            this.exchangeRequest.receiverUser = receiverUser;
+            this.exchangeRequestEntity.receiverUser = receiverUser;
             return this;
         }
 
         public Builder withRequestedItem(Item requestedItem) {
-            this.exchangeRequest.requestedItem = requestedItem;
+            this.exchangeRequestEntity.requestedItem = requestedItem;
             return this;
         }
 
         public Builder withOfferedItem(Item offeredItem) {
-            this.exchangeRequest.offeredItem = offeredItem;
+            this.exchangeRequestEntity.offeredItem = offeredItem;
             return this;
         }
 
         public Builder withStatus(String status) {
-            this.exchangeRequest.status = status;
+            this.exchangeRequestEntity.status = status;
             return this;
         }
 
-        public ExchangeRequest build() {
-            return this.exchangeRequest;
+        public ExchangeRequestEntity build() {
+            return this.exchangeRequestEntity;
         }
     }
 }
+
+// TODO - Created indexed on FK
+

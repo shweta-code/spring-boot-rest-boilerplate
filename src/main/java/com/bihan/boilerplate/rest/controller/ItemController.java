@@ -1,7 +1,8 @@
 package com.bihan.boilerplate.rest.controller;
 
+import com.bihan.boilerplate.rest.controller.response.PageableAPISuccessResponseEntity;
 import com.bihan.boilerplate.rest.dto.NewItemDetails;
-import com.bihan.boilerplate.rest.model.Item;
+import com.bihan.boilerplate.rest.entity.Item;
 import com.bihan.boilerplate.rest.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,12 +34,31 @@ public class ItemController {
     @DeleteMapping(value = "/{itemId}")
     public ResponseEntity<String> deleteItem(@PathVariable("itemId") Long itemId) {
         itemService.deleteItemById(itemId);
-        return new ResponseEntity<>("Item with ID " + itemId + " deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Item with ID " + itemId + " deleted successfully", HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/exchange")
+    public ResponseEntity<PageableAPISuccessResponseEntity<Item>> getExchangeableItems(@RequestHeader("bearerToken") Integer bearerToken,
+            @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize) {
+        // We will use the query params to serve paginated response
+        // This will keep the latency of APIs in check
+
+        // Will not expose Item entity directly, Rather a ItemResponse object will be
+        // constructed from Item object to expose right things
+        List<Item> items = itemService.getAll();
+        return new ResponseEntity<>(new PageableAPISuccessResponseEntity<Item>(items, page, pageSize), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Item>> getAllItems() {
-        return new ResponseEntity<>(itemService.getAll(), HttpStatus.OK);
+    public ResponseEntity<PageableAPISuccessResponseEntity<Item>> getMyItems(@RequestHeader("bearerToken") Integer bearerToken,
+                                                                                       @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize) {
+        // We will use the query params to serve paginated response
+        // This will keep the latency of APIs in check
+
+        // Will not expose Item entity directly, Rather a ItemResponse object will be
+        // constructed from Item object to expose right things
+        List<Item> items = itemService.getAll();
+        return new ResponseEntity<>(new PageableAPISuccessResponseEntity<Item>(items, page, pageSize), HttpStatus.OK);
     }
 }
 
@@ -49,3 +69,4 @@ public class ItemController {
 // Get - if user hits post for that, input validation
 // Post - input validation
 // Compose the code such that it is easy to break it down into microservices.
+// Create itemRefNo in the tale

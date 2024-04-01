@@ -3,7 +3,7 @@ package com.bihan.boilerplate.rest.repository;
 import java.util.Optional;
 
 import com.bihan.boilerplate.rest.dto.StudentLocation;
-import com.bihan.boilerplate.rest.model.Student;
+import com.bihan.boilerplate.rest.entity.Student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

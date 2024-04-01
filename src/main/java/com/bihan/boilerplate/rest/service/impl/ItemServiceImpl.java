@@ -2,13 +2,13 @@ package com.bihan.boilerplate.rest.service.impl;
 
 import com.bihan.boilerplate.rest.dto.NewItemDetails;
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
-import com.bihan.boilerplate.rest.model.Category;
-import com.bihan.boilerplate.rest.model.Item;
-import com.bihan.boilerplate.rest.repository.CategoryRepository;
+import com.bihan.boilerplate.rest.entity.Category;
+import com.bihan.boilerplate.rest.entity.Item;
 import com.bihan.boilerplate.rest.repository.ItemRepository;
 import com.bihan.boilerplate.rest.service.CategoryService;
 import com.bihan.boilerplate.rest.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -80,10 +80,20 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getAll() {
         try {
-            return itemRepository.findAll();
+            return itemRepository.findAll(sortByIdAsc());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void unListItemsForExchangeRequest(Long requestedItemId, Long offeredItemId) {
+        itemRepository.unListItems(requestedItemId, offeredItemId);
+    }
+
+    // TODO - Can create  Sort Factory that expose a static Sort factory method, that provides these sorts
+    private Sort sortByIdAsc() {
+        return Sort.by(Sort.Direction.ASC, "id");
     }
 
 }

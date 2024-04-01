@@ -1,6 +1,6 @@
 package com.bihan.boilerplate.rest.repository;
 
-import com.bihan.boilerplate.rest.model.Course;
+import com.bihan.boilerplate.rest.entity.Course;
 import com.bihan.boilerplate.rest.repository.custom.CustomCourseRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

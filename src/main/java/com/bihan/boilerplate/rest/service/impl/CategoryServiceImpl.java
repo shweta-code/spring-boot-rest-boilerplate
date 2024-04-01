@@ -1,7 +1,7 @@
 package com.bihan.boilerplate.rest.service.impl;
 
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
-import com.bihan.boilerplate.rest.model.Category;
+import com.bihan.boilerplate.rest.entity.Category;
 import com.bihan.boilerplate.rest.repository.CategoryRepository;
 import com.bihan.boilerplate.rest.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

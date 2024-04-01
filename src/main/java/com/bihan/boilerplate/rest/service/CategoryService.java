@@ -1,6 +1,6 @@
 package com.bihan.boilerplate.rest.service;
 
-import com.bihan.boilerplate.rest.model.Category;
+import com.bihan.boilerplate.rest.entity.Category;
 
 public interface CategoryService {
 

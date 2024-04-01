@@ -1,4 +1,4 @@
-package com.bihan.boilerplate.rest.model;
+package com.bihan.boilerplate.rest.entity;
 
 import lombok.*;
 
@@ -27,5 +27,5 @@ public class User {
     @NotNull(message = "password is required")
     private String password;
 
-    // To add timestamp fields here
+    // To add timestamp fields here, create
 }

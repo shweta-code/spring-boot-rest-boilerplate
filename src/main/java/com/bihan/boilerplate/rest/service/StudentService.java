@@ -1,7 +1,7 @@
 package com.bihan.boilerplate.rest.service;
 
 import com.bihan.boilerplate.rest.dto.StudentLocation;
-import com.bihan.boilerplate.rest.model.Student;
+import com.bihan.boilerplate.rest.entity.Student;
 
 public interface StudentService {
 

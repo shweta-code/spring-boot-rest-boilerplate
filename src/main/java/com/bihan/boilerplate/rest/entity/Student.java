@@ -1,4 +1,4 @@
-package com.bihan.boilerplate.rest.model;
+package com.bihan.boilerplate.rest.entity;
 
 import java.time.LocalDate;
 import java.util.HashSet;

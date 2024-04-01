@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.bihan.boilerplate.rest.dto.StudentLocation;
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
-import com.bihan.boilerplate.rest.model.Student;
+import com.bihan.boilerplate.rest.entity.Student;
 import com.bihan.boilerplate.rest.repository.StudentRepository;
 import com.bihan.boilerplate.rest.service.StudentService;
 

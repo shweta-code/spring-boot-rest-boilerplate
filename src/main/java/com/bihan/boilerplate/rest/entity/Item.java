@@ -1,4 +1,4 @@
-package com.bihan.boilerplate.rest.model;
+package com.bihan.boilerplate.rest.entity;
 
 import lombok.*;
 
@@ -28,6 +28,11 @@ public class Item {
     @NotNull
     @Column(name = "is_listed")
     private boolean isListed;
+
+    // TODO - Create owner_id
+    /*@ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User ownerUser;*/
 
     @Version
     private int version; // Version field for optimistic locking

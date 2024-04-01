@@ -1,7 +1,7 @@
 package com.bihan.boilerplate.rest.controller;
 
 import com.bihan.boilerplate.rest.dto.StudentCourse;
-import com.bihan.boilerplate.rest.model.Course;
+import com.bihan.boilerplate.rest.entity.Course;
 import com.bihan.boilerplate.rest.service.CourseService;
 
 import org.springframework.beans.factory.annotation.Autowired;

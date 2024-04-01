@@ -1,7 +1,6 @@
 package com.bihan.boilerplate.rest.repository;
 
-import com.bihan.boilerplate.rest.model.Item;
-import com.bihan.boilerplate.rest.model.User;
+import com.bihan.boilerplate.rest.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
