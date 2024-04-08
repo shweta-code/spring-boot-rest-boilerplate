@@ -2,12 +2,13 @@ package com.bihan.boilerplate.rest.entity.exchangeRequest;
 
 import com.bihan.boilerplate.rest.entity.Item;
 import com.bihan.boilerplate.rest.entity.User;
-import com.bihan.boilerplate.rest.entity.baseEntity.BaseEntity;
 import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Getter
 @AllArgsConstructor

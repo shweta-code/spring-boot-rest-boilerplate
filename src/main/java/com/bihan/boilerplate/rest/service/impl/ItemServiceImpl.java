@@ -2,10 +2,10 @@ package com.bihan.boilerplate.rest.service.impl;
 
 import com.bihan.boilerplate.rest.constants.EntityConstants;
 import com.bihan.boilerplate.rest.dto.NewItemDetails;
-import com.bihan.boilerplate.rest.entity.User;
-import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
 import com.bihan.boilerplate.rest.entity.Category;
 import com.bihan.boilerplate.rest.entity.Item;
+import com.bihan.boilerplate.rest.entity.User;
+import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
 import com.bihan.boilerplate.rest.repository.ItemRepository;
 import com.bihan.boilerplate.rest.service.CategoryService;
 import com.bihan.boilerplate.rest.service.ItemService;

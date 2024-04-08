@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 @Getter
 @Setter

@@ -3,7 +3,8 @@ package com.bihan.boilerplate.rest.entity;
 import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 

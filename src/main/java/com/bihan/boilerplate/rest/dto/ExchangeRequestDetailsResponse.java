@@ -4,7 +4,6 @@ package com.bihan.boilerplate.rest.dto;
 import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestEntity;
 import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestStatus;
 import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestUserActions;
-import com.bihan.boilerplate.rest.exception.BadRequestException;
 import lombok.*;
 
 import java.util.HashSet;

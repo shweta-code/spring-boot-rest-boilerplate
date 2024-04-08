@@ -1,7 +1,10 @@
 package com.bihan.boilerplate.rest.entity;
 
 import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -3,11 +3,11 @@ package com.bihan.boilerplate.rest.service.impl;
 
 import com.bihan.boilerplate.rest.constants.ApplicationConstants;
 import com.bihan.boilerplate.rest.dto.ExchangeRequestDetailsResponse;
-import com.bihan.boilerplate.rest.model.request.NewExchangeRequestDetails;
+import com.bihan.boilerplate.rest.entity.Item;
 import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestEntity;
 import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestStatus;
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
-import com.bihan.boilerplate.rest.entity.Item;
+import com.bihan.boilerplate.rest.model.request.NewExchangeRequestDetails;
 import com.bihan.boilerplate.rest.repository.ExchangeRequestRepository;
 import com.bihan.boilerplate.rest.service.ExchangeRequestService;
 import com.bihan.boilerplate.rest.service.ItemService;
@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * This service is responsible for actions related to ExchangeRequest
