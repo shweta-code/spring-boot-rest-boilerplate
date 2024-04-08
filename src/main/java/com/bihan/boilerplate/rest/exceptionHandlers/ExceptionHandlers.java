@@ -2,7 +2,9 @@ package com.bihan.boilerplate.rest.exceptionHandlers;
 
 import com.bihan.boilerplate.rest.controller.response.APIErrorResponseEntity;
 import com.bihan.boilerplate.rest.exception.BadRequestException;
+import com.bihan.boilerplate.rest.exception.NotFoundException;
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,8 +22,8 @@ public class ExceptionHandlers {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<APIErrorResponseEntity> handleGenericException(Exception ex) {
+    @ExceptionHandler({Exception.class, DataAccessException.class})
+    public ResponseEntity<APIErrorResponseEntity> handleGenericOrDataAccessException(Exception ex) {
         APIErrorResponseEntity errorResponse = new APIErrorResponseEntity();
         errorResponse.setSuccess(false);
         errorResponse.setMessage("Something went wrong. Please try again or contact support.");
@@ -36,6 +38,15 @@ public class ExceptionHandlers {
         errorResponse.setMessage(ex.getMessage());
         // errorResponse.setErrors(Collections.singletonList(ex.getMessage()));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<APIErrorResponseEntity> handleMotFoundException(Exception ex) {
+        APIErrorResponseEntity errorResponse = new APIErrorResponseEntity();
+        errorResponse.setSuccess(false);
+        errorResponse.setMessage(ex.getMessage());
+        // errorResponse.setErrors(Collections.singletonList(ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
 }

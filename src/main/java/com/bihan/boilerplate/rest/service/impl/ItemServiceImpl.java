@@ -1,17 +1,19 @@
 package com.bihan.boilerplate.rest.service.impl;
 
+import com.bihan.boilerplate.rest.constants.EntityConstants;
 import com.bihan.boilerplate.rest.dto.NewItemDetails;
+import com.bihan.boilerplate.rest.entity.User;
 import com.bihan.boilerplate.rest.exception.ResourceNotFoundException;
 import com.bihan.boilerplate.rest.entity.Category;
 import com.bihan.boilerplate.rest.entity.Item;
 import com.bihan.boilerplate.rest.repository.ItemRepository;
 import com.bihan.boilerplate.rest.service.CategoryService;
 import com.bihan.boilerplate.rest.service.ItemService;
+import com.bihan.boilerplate.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Item getItemById(Long itemId) {
         Optional<Item> item = itemRepository.findById(itemId);
@@ -34,38 +39,33 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    // TODO - Check if this is required
-    @Transactional
-    public NewItemDetails addItem(NewItemDetails newItemDetails) {
-        try {
-            Long categoryId = newItemDetails.getCategoryId();
-            Category category = categoryService.getCategoryById(categoryId);
+    // TODO - Highlight Transformer Pattern
+    public NewItemDetails addItem(NewItemDetails newItemDetails, Long userId) {
+        Long categoryId = newItemDetails.getCategoryId();
+        Category category = categoryService.getCategoryById(categoryId);
+        User ownerUser = userService.getUserById(userId);
 
-            // We can use a transformer pattern here that transforms NewItemDetails into Item entity
-            // The transformer will take newItemDetails and transform it to Item by mapping fields appropriately
-            // and building Item
-            Item.ItemBuilder itemBuilder = new Item.ItemBuilder().description(newItemDetails.getDescription())
-                    .isListed(newItemDetails.isListed())
-                    .category(category);
-            Item item = itemBuilder.build();
-            itemRepository.save(item);
+        // We can use a transformer pattern here that transforms NewItemDetails into Item entity
+        // The transformer will take newItemDetails and transform it to Item by mapping fields appropriately
+        // and building Item
+        Item.ItemBuilder itemBuilder = new Item.ItemBuilder().description(newItemDetails.getDescription())
+                .isListed(newItemDetails.isListed())
+                .category(category)
+                .ownerUser(ownerUser);
+        Item item = itemBuilder.build();
+        itemRepository.save(item);
 
-            // We can create another DTO - NewItemCreatedDetails
-            // which has id field and also takes into consideration the state that
-            // we want to expose back to user
-            return newItemDetails;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        // We can create another DTO - NewItemCreatedDetails
+        // which has id field and also takes into consideration the state that
+        // we want to expose back to user
+        return newItemDetails;
     }
 
     @Override
     public void deleteItemById(Long itemId) {
-        try {
-            itemRepository.deleteById(itemId);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        itemRepository.deleteById(itemId);
+
     }
 
     @Override
@@ -87,13 +87,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void unListItemsForExchangeRequest(Long requestedItemId, Long offeredItemId) {
-        itemRepository.unListItems(requestedItemId, offeredItemId);
+    public void unListItems(Long... itemIds) {
+        itemRepository.unListItems(itemIds);
     }
+
 
     // TODO - Can create  Sort Factory that expose a static Sort factory method, that provides these sorts
     private Sort sortByIdAsc() {
-        return Sort.by(Sort.Direction.ASC, "id");
+        return Sort.by(Sort.Direction.ASC, EntityConstants.ENTITY_FIELD_ID);
     }
 
 }

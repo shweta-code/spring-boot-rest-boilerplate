@@ -16,9 +16,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // TODO - Create a constant for query
     @Modifying
-    @Query(nativeQuery = true, value = "Update item set is_listed = 0 " +
-            "where id in (?1, ?2)")
-    void unListItems(Long requestedItemId, Long offeredItemId);
+    @Query(value = "Update Item item set item.isListed = false " +
+            "where item.id in (:itemIds)")
+    int unListItems(Long... itemIds);
 
     @Query(nativeQuery = true, value = "select id, description from item where owner_id != ?1 order by id limit ?2 OFFSET ?3")
     void findInstrumentsForExchange(Long userId, int pageSize, int offset);

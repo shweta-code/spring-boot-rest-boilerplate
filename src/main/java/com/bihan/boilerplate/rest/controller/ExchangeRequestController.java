@@ -3,8 +3,7 @@ package com.bihan.boilerplate.rest.controller;
 import com.bihan.boilerplate.rest.controller.response.PageableAPISuccessResponseEntity;
 import com.bihan.boilerplate.rest.dto.ExchangeRequest;
 import com.bihan.boilerplate.rest.dto.ExchangeRequestDetailsResponse;
-import com.bihan.boilerplate.rest.dto.NewExchangeRequestDetails;
-import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestEntity;
+import com.bihan.boilerplate.rest.model.request.NewExchangeRequestDetails;
 import com.bihan.boilerplate.rest.service.ExchangeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,33 +15,48 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping("/api/v1/exchangeRequests")
+@RequestMapping("/api/v1/exchangeRequest")
 public class ExchangeRequestController {
 
     @Autowired
     private ExchangeRequestService exchangeRequestService;
 
     // TODO - validate input
-    // TODO - take requester user from header
+    // TODO - Write in doc , for Authorizaation , we will do API level access
+    // TODO - Include roles table in db schema
     @PostMapping()
-    public ResponseEntity<NewExchangeRequestDetails> createExchangeRequest(@RequestBody NewExchangeRequestDetails newExchangeRequestDetails) {
-        // TODO - We can create a common exception layer to handle exception across requests
+    public ResponseEntity<NewExchangeRequestDetails> create(@RequestHeader("bearerToken") Long bearerToken,@RequestBody NewExchangeRequestDetails newExchangeRequestDetails) {
         // We can use functional programming to pass what these methods will do and return response entity
 
-       exchangeRequestService.createRequest(newExchangeRequestDetails);
+
+       exchangeRequestService.createRequest(newExchangeRequestDetails, bearerToken);
        return new ResponseEntity<>(newExchangeRequestDetails, HttpStatus.OK);
     }
 
     // TODO - Validation of bearer token
     @GetMapping()
     public ResponseEntity<PageableAPISuccessResponseEntity<ExchangeRequest>> list(@RequestHeader("bearerToken") Long bearerToken, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize) {
-
-        // TODO - We can create a common exception layer to handle exception across requests
-        // We can use functional programming to pass what these methods will do and return response entity
-
-        List<ExchangeRequestDetailsResponse> exchangeRequestEntities = exchangeRequestService.listMyExchangeRequests(bearerToken);
+        List<ExchangeRequestDetailsResponse> exchangeRequestEntities = exchangeRequestService.getExchangeRequestsForAUser(bearerToken);
         return new ResponseEntity<>(new PageableAPISuccessResponseEntity(exchangeRequestEntities, page, pageSize), HttpStatus.OK);
     }
+
+    @PutMapping("{requestId}/complete")
+    public ResponseEntity<ExchangeRequestDetailsResponse> completeExchangeRequests(@RequestHeader("bearerToken") Long bearerToken, Long exchangeRequestId) {
+        ExchangeRequestDetailsResponse exchangeRequestDetailsResponse = exchangeRequestService.completeExchangeRequest(exchangeRequestId, bearerToken);
+        return new ResponseEntity<>(exchangeRequestDetailsResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestId}/accept")
+    public ResponseEntity<ExchangeRequestDetailsResponse> acceptExchangeRequest(@RequestHeader("bearerToken") Long bearerToken, Long exchangeRequestId) {
+        // TODO - verify if user can accept the request or say Forbidden - Validation
+        ExchangeRequestDetailsResponse exchangeRequestDetailsResponse = exchangeRequestService.acceptExchangeRequest(exchangeRequestId, bearerToken);
+        return new ResponseEntity<>(exchangeRequestDetailsResponse, HttpStatus.OK);
+    }
+
+    // TODO - P1 - Reject , Cancel exchange Request
+    // TODO - Entity structure for Browse Request - Thought process on database indexing
+    // TODO - You can read about different headers of REST
+
 
     /*@GetMapping("/received")
     public ResponseEntity<ExchangeRequestDetailsResponse> receivedExchangeRequests() {

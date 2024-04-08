@@ -13,38 +13,38 @@ public enum ExchangeRequestStatus {
 
         @Override
         protected void addActionsOnRequesterSide() {
-            this.nextActionsOnReceiverSide = Collections.EMPTY_SET;
+            this.nextActionsOnRequesterSide = Collections.EMPTY_SET;
         }
     },
     CREATED("CREATED") {
         @Override
         protected void addActionsOnReceiverSide() {
-            Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextStatus = new HashSet<>();
-            nextStatus.add(ExchangeRequestEntity.ExchangeRequestUserActions.ACCEPT);
-            nextStatus.add(ExchangeRequestEntity.ExchangeRequestUserActions.REJECT);
+            Set<ExchangeRequestUserActions> nextStatus = new HashSet<>();
+            nextStatus.add(ExchangeRequestUserActions.ACCEPT);
+            nextStatus.add(ExchangeRequestUserActions.REJECT);
             this.nextActionsOnReceiverSide = nextStatus;
         }
 
         @Override
         protected void addActionsOnRequesterSide() {
-            Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextStatus = new HashSet<>();
-            nextStatus.add(ExchangeRequestEntity.ExchangeRequestUserActions.CANCEL);
-            this.nextActionsOnReceiverSide = nextStatus;
+            Set<ExchangeRequestUserActions> nextStatus = new HashSet<>();
+            nextStatus.add(ExchangeRequestUserActions.CANCEL);
+            this.nextActionsOnRequesterSide = nextStatus;
         }
     },
     ACCEPTED("ACCEPTED") {
         @Override
         protected void addActionsOnReceiverSide() {
-            Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextStatus = new HashSet<>();
-            nextStatus.add(ExchangeRequestEntity.ExchangeRequestUserActions.COMPLETE);
+            Set<ExchangeRequestUserActions> nextStatus = new HashSet<>();
+            nextStatus.add(ExchangeRequestUserActions.COMPLETE);
             this.nextActionsOnReceiverSide = nextStatus;
         }
 
         @Override
         protected void addActionsOnRequesterSide() {
-            Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextStatus = new HashSet<>();
-            nextStatus.add(ExchangeRequestEntity.ExchangeRequestUserActions.CANCEL);
-            this.nextActionsOnReceiverSide = nextStatus;
+            Set<ExchangeRequestUserActions> nextStatus = new HashSet<>();
+            nextStatus.add(ExchangeRequestUserActions.CANCEL);
+            this.nextActionsOnRequesterSide = nextStatus;
         }
     },
     REJECTED("REJECTED") {
@@ -55,7 +55,7 @@ public enum ExchangeRequestStatus {
 
         @Override
         protected void addActionsOnRequesterSide() {
-            this.nextActionsOnReceiverSide = Collections.EMPTY_SET;
+            this.nextActionsOnRequesterSide = Collections.EMPTY_SET;
         }
     }, // terminal state
     CANCELLED("CANCELLED") {
@@ -66,7 +66,7 @@ public enum ExchangeRequestStatus {
 
         @Override
         protected void addActionsOnRequesterSide() {
-            this.nextActionsOnReceiverSide = Collections.EMPTY_SET;
+            this.nextActionsOnRequesterSide = Collections.EMPTY_SET;
         }
     },  // terminal state
     EXPIRED("EXPIRED") {
@@ -77,7 +77,7 @@ public enum ExchangeRequestStatus {
 
         @Override
         protected void addActionsOnRequesterSide() {
-            this.nextActionsOnReceiverSide = Collections.EMPTY_SET;
+            this.nextActionsOnRequesterSide = Collections.EMPTY_SET;
         }
     }, // terminal state
     COMPLETED("COMPLETED") {
@@ -88,16 +88,19 @@ public enum ExchangeRequestStatus {
 
         @Override
         protected void addActionsOnRequesterSide() {
-            this.nextActionsOnReceiverSide = Collections.EMPTY_SET;
+            this.nextActionsOnRequesterSide = Collections.EMPTY_SET;
         }
     }; // terminal state
 
     private String value;
-    protected Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextActionsOnReceiverSide;
-    protected Set<ExchangeRequestEntity.ExchangeRequestUserActions> nextActionsOnRequesterSide;
+    protected Set<ExchangeRequestUserActions> nextActionsOnReceiverSide;
+    protected Set<ExchangeRequestUserActions> nextActionsOnRequesterSide;
 
     ExchangeRequestStatus(String value) {
+
         this.value = value;
+        this.addActionsOnReceiverSide();
+        this.addActionsOnRequesterSide();
     }
 
     public String getValue() {
@@ -108,11 +111,11 @@ public enum ExchangeRequestStatus {
 
     protected abstract void addActionsOnRequesterSide();
 
-    public Set<ExchangeRequestEntity.ExchangeRequestUserActions> getNextActionsOnReceiverSide() {
+    public Set<ExchangeRequestUserActions> getNextActionsOnReceiverSide() {
         return nextActionsOnReceiverSide;
     }
 
-    public Set<ExchangeRequestEntity.ExchangeRequestUserActions> getNextActionsOnRequesterSide() {
+    public Set<ExchangeRequestUserActions> getNextActionsOnRequesterSide() {
         return nextActionsOnRequesterSide;
     }
 

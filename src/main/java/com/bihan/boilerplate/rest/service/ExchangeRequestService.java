@@ -1,18 +1,16 @@
 package com.bihan.boilerplate.rest.service;
 
-import com.bihan.boilerplate.rest.dto.ExchangeRequest;
 import com.bihan.boilerplate.rest.dto.ExchangeRequestDetailsResponse;
-import com.bihan.boilerplate.rest.dto.NewExchangeRequestDetails;
-import com.bihan.boilerplate.rest.entity.exchangeRequest.ExchangeRequestEntity;
+import com.bihan.boilerplate.rest.model.request.NewExchangeRequestDetails;
 
 import java.util.List;
 
 public interface ExchangeRequestService {
-    NewExchangeRequestDetails createRequest(NewExchangeRequestDetails exchangeRequest);
+    ExchangeRequestDetailsResponse createRequest(NewExchangeRequestDetails exchangeRequest, Long requesterUserId);
 
-    List<ExchangeRequestDetailsResponse> listMyExchangeRequests(Long userId);
+    List<ExchangeRequestDetailsResponse> getExchangeRequestsForAUser(Long userId);
 
-    /*NewExchangeRequestDetails acceptRequest(Long exchangeRequestId, Long userId);*/
+    ExchangeRequestDetailsResponse acceptExchangeRequest(Long exchageRequestId, Long userId);
 
-
+    ExchangeRequestDetailsResponse completeExchangeRequest(Long exchangeRequestId, Long userId);
 }

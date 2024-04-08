@@ -1,8 +1,10 @@
 package com.bihan.boilerplate.rest.entity;
 
+import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -12,11 +14,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Entity
 @Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends VersionedBaseEntity {
 
     @NotNull(message = "User name is required")
     private String name;
@@ -27,5 +25,7 @@ public class User {
     @NotNull(message = "password is required")
     private String password;
 
-    // To add timestamp fields here, create
+    @NotNull(message = "credits is required")
+    @Min(value = 0, message = "Credits must be greater than or equal to 0")
+    private Integer credits;
 }

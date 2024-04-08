@@ -1,24 +1,20 @@
 package com.bihan.boilerplate.rest.entity;
 
+import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
 @Table(name = "item")
-public class Item {
+public class Item extends VersionedBaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull(message = "Category name is required")
     private Category category;
 
@@ -29,21 +25,33 @@ public class Item {
     @Column(name = "is_listed")
     private boolean isListed;
 
-    // TODO - Create owner_id
-    /*@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
-    private User ownerUser;*/
+    private User ownerUser;
 
-    @Version
-    private int version; // Version field for optimistic locking
+    private void setCategory(Category category) {
+        this.category = category;
+    }
 
-    // To add timestamp fields here, created_at, modified_at, created_by, modified_by
+    private void setDescription(String description) {
+        this.description = description;
+    }
+
+    private void setListed(boolean listed) {
+        isListed = listed;
+    }
+
+    private void setOwnerUser(User ownerUser) {
+        this.ownerUser = ownerUser;
+    }
 
     public static class ItemBuilder {
         private Long id;
         private Category category;
         private String description;
         private boolean isListed;
+
+        private User ownerUser;
 
         public ItemBuilder() {
         }
@@ -55,6 +63,11 @@ public class Item {
 
         public ItemBuilder category(Category category) {
             this.category = category;
+            return this;
+        }
+
+        public ItemBuilder ownerUser(User ownerUser) {
+            this.ownerUser = ownerUser;
             return this;
         }
 
@@ -74,6 +87,7 @@ public class Item {
             item.setCategory(category);
             item.setDescription(description);
             item.setListed(isListed);
+            item.setOwnerUser(ownerUser);
             return item;
         }
     }

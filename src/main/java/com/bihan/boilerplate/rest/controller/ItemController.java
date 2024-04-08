@@ -26,8 +26,8 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<NewItemDetails> createNewItem(@RequestBody NewItemDetails newItemDetails) {
-        itemService.addItem(newItemDetails);
+    public ResponseEntity<NewItemDetails> createNewItem(@RequestHeader("bearerToken") Long bearerToken,@RequestBody NewItemDetails newItemDetails) {
+        itemService.addItem(newItemDetails, bearerToken);
         return new ResponseEntity<>(newItemDetails, HttpStatus.CREATED);
     }
 

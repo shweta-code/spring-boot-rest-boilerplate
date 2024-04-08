@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 public class RestApplication {
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		System.out.println("Starting the application.");
 		SpringApplication.run(RestApplication.class, args);
 	}
 }

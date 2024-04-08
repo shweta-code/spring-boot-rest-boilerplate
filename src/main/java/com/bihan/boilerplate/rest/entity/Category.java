@@ -1,5 +1,6 @@
 package com.bihan.boilerplate.rest.entity;
 
+import com.bihan.boilerplate.rest.entity.baseEntity.VersionedBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,11 +13,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Entity
 @Table(name = "category")
-public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Category extends VersionedBaseEntity {
 
     @NotNull(message = "Category name is required")
     private String name;
@@ -24,7 +21,7 @@ public class Category {
     @NotNull(message = "description is required")
     private String description;
 
-    // Todo add timestamp fields here - created_at, modified_at, created_by, modified_by
+    // TODO - we can check hibernate entity validation as there is in course entity class
 }
 
 // TODO -

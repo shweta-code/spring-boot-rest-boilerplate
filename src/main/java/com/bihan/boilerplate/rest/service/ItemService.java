@@ -8,7 +8,7 @@ import java.util.List;
 public interface ItemService {
     Item getItemById(Long itemId);
 
-    NewItemDetails addItem(NewItemDetails newItemDetails);
+    NewItemDetails addItem(NewItemDetails newItemDetails, Long userId);
 
     void deleteItemById(Long itemId);
 
@@ -17,5 +17,6 @@ public interface ItemService {
     List<Item> getAll();
 
     // TODO- Accept varargs
-    void unListItemsForExchangeRequest(Long requestedItemId, Long offeredItemId);
+    void unListItems(Long... ids);
+
 }

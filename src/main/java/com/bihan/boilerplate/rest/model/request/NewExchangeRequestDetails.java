@@ -1,4 +1,4 @@
-package com.bihan.boilerplate.rest.dto;
+package com.bihan.boilerplate.rest.model.request;
 
 
 import lombok.*;
@@ -10,11 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class NewExchangeRequestDetails {
-
-    // TODO - JSON Writing standards
-    private Long requesterUserId;
-
-    private Long receiverUserId;
 
     private Long requestedItemId;
 
