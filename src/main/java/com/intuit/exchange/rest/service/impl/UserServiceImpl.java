@@ -1,7 +1,7 @@
 package com.intuit.exchange.rest.service.impl;
 
 import com.intuit.exchange.rest.constants.EntityConstants;
-import com.intuit.exchange.rest.controller.response.UserDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.UserDetailsResponse;
 import com.intuit.exchange.rest.entity.User;
 import com.intuit.exchange.rest.exception.ArgumentNullException;
 import com.intuit.exchange.rest.exception.DatabaseException;

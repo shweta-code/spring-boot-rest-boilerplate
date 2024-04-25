@@ -1,9 +1,8 @@
 package com.intuit.exchange.rest.exceptionHandlers;
 
-import com.intuit.exchange.rest.controller.response.APIErrorResponseEntity;
+import com.intuit.exchange.rest.responseObjects.APIErrorResponseEntity;
 import com.intuit.exchange.rest.exception.BadRequestException;
 import com.intuit.exchange.rest.exception.ForbiddenActionException;
-import com.intuit.exchange.rest.exception.NotFoundException;
 import com.intuit.exchange.rest.exception.ResourceNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -32,12 +31,6 @@ public class ExceptionHandlers {
     public ResponseEntity<APIErrorResponseEntity> handleBadRequestException(Exception ex) {
         print(ex);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIErrorResponseEntity.create(ex.getMessage()));
-    }
-
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<APIErrorResponseEntity> handleNotFoundException(Exception ex) {
-        print(ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(APIErrorResponseEntity.create(ex.getMessage()));
     }
 
     @ExceptionHandler(ForbiddenActionException.class)

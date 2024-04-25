@@ -8,11 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-// TODO - Create Table Borrow Request
-// spli tables - Exchange Request, Borrow
-// response
 @RestController
 @Validated
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("/api/v1/category")
 public class CategoryController {
 
@@ -30,10 +28,3 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.CREATED);
     }
 }
-
-// TODO
-// 1. What should happen if you fail to create a resource.
-// Possible Exceptions when inserting a new row in mysql.
-// 2. Best practices of a Spring project
-// 3. Check for validity of inputs and validity before inserting into database in one sample API
-// TODO - Remove category controller

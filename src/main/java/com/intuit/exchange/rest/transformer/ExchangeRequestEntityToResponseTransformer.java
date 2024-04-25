@@ -1,6 +1,6 @@
 package com.intuit.exchange.rest.transformer;
 
-import com.intuit.exchange.rest.controller.response.ExchangeRequestDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.ExchangeRequestDetailsResponse;
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestEntity;
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestStatus;
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestUserActions;
@@ -32,7 +32,9 @@ public class ExchangeRequestEntityToResponseTransformer implements Transformer<E
         return ExchangeRequestDetailsResponse.builder()
                 .receiverUserId(exchangeRequest.getReceiverUser().getId())
                 .requestedItemId(exchangeRequest.getRequestedItem().getId())
+                .requestedItemName(exchangeRequest.getRequestedItem().getDescription())
                 .offeredItemId(exchangeRequest.getOfferedItem().getId())
+                .offeredItemName(exchangeRequest.getOfferedItem().getDescription())
                 .requesterUserId(exchangeRequest.getRequesterUser().getId())
                 .exchangeRequestId(exchangeRequest.getId())
                 .possibleActions(possibleActions)

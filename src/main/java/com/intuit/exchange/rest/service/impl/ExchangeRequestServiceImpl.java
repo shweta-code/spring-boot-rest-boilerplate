@@ -4,7 +4,7 @@ package com.intuit.exchange.rest.service.impl;
 import com.intuit.exchange.rest.constants.ApplicationConstants;
 import com.intuit.exchange.rest.constants.EntityConstants;
 import com.intuit.exchange.rest.constants.ErrorConstants;
-import com.intuit.exchange.rest.controller.response.ExchangeRequestDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.ExchangeRequestDetailsResponse;
 import com.intuit.exchange.rest.entity.Item;
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestEntity;
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestStatus;
@@ -45,22 +45,26 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     @Transactional
     public ExchangeRequestDetailsResponse createRequest(NewExchangeRequestDetails newExchangeRequestDetails, Long requesterUserId){
 
-        // Validate if it is a valid request
-        // if the musical instruments are valid
-        // Check the requested musical instrument is not owned by the user
-        // Check the offered musical instrument is owned by the user
-        // throw BadRequestException in each case
-
-        // create a request which is in progress
         Item offeredItem = itemService.getItemById(newExchangeRequestDetails.getOfferedItemId());
         Item requestedItem = itemService.getItemById(newExchangeRequestDetails.getRequestedItemId());
-        if(!requestedItem.isListed() || !offeredItem.isListed()){
-            // TODO throw new ResourceNotAvailableException();
+
+        if (!Objects.equals(offeredItem.getOwnerUser().getId(), requesterUserId)) {
+            throw new BadRequestException("The offered item must belong to the requester user.");
+        }
+        if (Objects.equals(requestedItem.getOwnerUser().getId(), requesterUserId)) {
+            throw new BadRequestException("The requested item does belongs  to the requester user");
+        }
+
+        if(!requestedItem.isListed()){
+            throw new ResourceNotFoundException("Item", EntityConstants.ENTITY_FIELD_ID, requestedItem.getId() );
+        }
+        if(!offeredItem.isListed()){
+            throw new ResourceNotFoundException("Item", EntityConstants.ENTITY_FIELD_ID, offeredItem.getId() );
         }
 
         ExchangeRequestEntity inProgressExchangeRequest = new ExchangeRequestEntity.Builder()
-                .withRequesterUser(requestedItem.getOwnerUser())
-                .withReceiverUser(offeredItem.getOwnerUser())
+                .withRequesterUser(offeredItem.getOwnerUser())
+                .withReceiverUser(requestedItem.getOwnerUser())
                 .withRequestedItem(requestedItem)
                 .withOfferedItem(offeredItem)
                 .withStatus(ExchangeRequestStatus.IN_PROGRESS.getValue())

@@ -1,7 +1,7 @@
 package com.intuit.exchange.rest.controller;
 
-import com.intuit.exchange.rest.controller.response.ItemDetailsResponse;
-import com.intuit.exchange.rest.controller.response.PageableAPISuccessResponseEntity;
+import com.intuit.exchange.rest.responseObjects.ItemDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.PageableAPISuccessResponseEntity;
 import com.intuit.exchange.rest.dto.NewItemDetails;
 import com.intuit.exchange.rest.entity.Item;
 import com.intuit.exchange.rest.service.ItemService;
@@ -48,11 +48,3 @@ public class ItemController {
         return new ResponseEntity<>(new PageableAPISuccessResponseEntity<ItemDetailsResponse>(items, page, pageSize, items.size()), HttpStatus.OK);
     }
 }
-
-// TODO
-
-// 2. Best practices of a Spring project
-// Get - if user hits post for that, input validation
-// Post - input validation
-// Compose the code such that it is easy to break it down into microservices.
-// Create itemRefNo in the tale

@@ -1,6 +1,6 @@
 package com.intuit.exchange.rest.service;
 
-import com.intuit.exchange.rest.controller.response.ItemDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.ItemDetailsResponse;
 import com.intuit.exchange.rest.dto.NewItemDetails;
 import com.intuit.exchange.rest.entity.Item;
 

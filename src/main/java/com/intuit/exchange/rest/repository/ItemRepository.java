@@ -13,7 +13,6 @@ import java.util.List;
 @Transactional
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-
     @Modifying
     @Query(value = "Update Item item set item.isListed = false " +
             "where item.id in (:itemIds)")
@@ -25,8 +24,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "Select item from Item item where item.ownerUser.id = :userId")
     List<Item> itemsOfAUser(Long userId);
 
-    //TODO -Highlight - Unauthorized access
-    //TODO - Highlight - Rate Limiting
+    // TODO -Highlight - Unauthorized access
+    // TODO - Highlight - Rate Limiting
     // TODO - Highlight Transformer Pattern
 
     // TODO - Create a constant for query
@@ -40,4 +39,18 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     // TODO - Include roles table in db schema
     // TODO - Data size validation , min-max validation
     // TODO - Input validations
+
+    // TODO - Add other methods to change the status of ExchangeRequest
+    // TODO - Add some code for pessimistic locking at abstract level
+    // TODO - Document which parts of the application will be good with pessimistic locking
+    // TODO - and optimistic locking
+    // TODO -
+
+    // TODO
+// 1. What should happen if you fail to create a resource.
+// Possible Exceptions when inserting a new row in mysql.
+// 2. Best practices of a Spring project
+// 3. Check for validity of inputs and validity before inserting into database in one sample API
+// TODO - Create exchnage request ref no n table exchnageRequest, split exchangeRequest in three tables
+// TODO - Use Log4j, Swagge
 }

@@ -1,6 +1,6 @@
 package com.intuit.exchange.rest.service;
 
-import com.intuit.exchange.rest.controller.response.ExchangeRequestDetailsResponse;
+import com.intuit.exchange.rest.responseObjects.ExchangeRequestDetailsResponse;
 import com.intuit.exchange.rest.model.request.NewExchangeRequestDetails;
 
 import java.util.List;

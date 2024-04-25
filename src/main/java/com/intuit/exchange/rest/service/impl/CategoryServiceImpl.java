@@ -34,5 +34,3 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 }
-// TODO
-// 1. How to gracefully handle crud exceptions? - Sushma / Akhil

@@ -1,4 +1,4 @@
-package com.intuit.exchange.rest.controller.response;
+package com.intuit.exchange.rest.responseObjects;
 
 
 import com.intuit.exchange.rest.entity.exchangeRequest.ExchangeRequestUserActions;
@@ -18,7 +18,11 @@ public class ExchangeRequestDetailsResponse {
 
     private Long requestedItemId;
 
+    private String requestedItemName;
+
     private Long offeredItemId;
+
+    private String offeredItemName;
 
     private Long exchangeRequestId;
 
